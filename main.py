@@ -1,4 +1,8 @@
 #!/usr/bin/python3
+##### A Poker Game #####
+# By Eliot Smith
+# Version 0.0.1
+# April 13, 2021
 
 from random import choice as pick
 
@@ -33,10 +37,25 @@ def dealHand(n, deck):
         hand.append(card)
     return hand
 
-d = createDeck(52)
-nd = shuffleDeck(d)
-hand1 = dealHand(5, nd)
-hand2 = dealHand(5, nd)
+print("Hello and Welcome to our Poker game!")
+while True:
+    user = input("""What would you like to do?
+            Please type:
+            'd' for deal,
+            'h' for help or
+            'q' for quit.""")
+    if user in ("d", "de", "dea", "deal"):
+        d = createDeck(52)
+        nd = shuffleDeck(d)
+        hand = dealHand(5, nd)
+        print(hand)
+    elif user in ("h", "he", "hel", "help"):
+        print("That would be nice, wouldn't it?")
+    elif user in ("q", "qu", "qui", "quit"):
+        break
 
-print(hand1)
-print(hand2)
+# = createDeck(52)
+# nd = shuffleDeck(d)
+# hand1 = dealHand(5, nd)
+# hand2 = dealHand(5, nd)
+
