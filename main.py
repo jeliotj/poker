@@ -3,27 +3,40 @@
 from random import choice as pick
 
 # Constants
-suits = ["S", "H", "D", "C"]
-ranks = ["2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"]
+SUITS = ["S", "H", "D", "C"]
+RANKS = ["2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"]
 
-# Initializing needed arrays
-unshufDeck1 = []
-shufDeck1 = []
-hand1 = []
-hand2 = []
+def createDeck(n):
+    """ Create an unshuffled deck of n cards """
+    deck = []
+    for i in SUITS:
+        for j in RANKS:
+            deck.append(j+i)
+    return deck
 
-# Create unshuffled, 52-card, standard American deck
-for i in suits:
-    for j in ranks:
-        unshufDeck1.append(j+i)
+def shuffleDeck(deck):
+    """ Shuffle an unshuffled deck """
+    newdeck = []
+    for i in range(0, len(deck)):
+        card = pick(deck)
+        newdeck.append(card)
+        deck.remove(card)
+        
+    return newdeck
 
-# Shuffle the deck
-for k in range(0, len(unshufDeck1)):
-    card = pick(unshufDeck1)
-    shufDeck1.append(card)
-    unshufDeck1.remove(card)
-    
-# Deal the hands
+def dealHand(n, deck):
+    """ Deal an n card hand with a shuffled deck. """
+    hand = []
+    for i in range(0,n):
+        card = pick(deck)
+        deck.remove(card)
+        hand.append(card)
+    return hand
 
+d = createDeck(52)
+nd = shuffleDeck(d)
+hand1 = dealHand(5, nd)
+hand2 = dealHand(5, nd)
 
-
+print(hand1)
+print(hand2)
