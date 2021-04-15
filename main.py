@@ -10,7 +10,7 @@ import re
 
 # Constants
 SUITS = ["S", "H", "D", "C"]
-RANKS = ["2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"]
+RANKS = ["2", "3", "4", "5", "6", "7", "8", "9", "T", "J", "Q", "K", "A"]
 
 def createDeck(n):
     """ Create an unshuffled deck of n cards """
@@ -63,30 +63,43 @@ def buyChips():
         print("You can only buy up to $100 in chips.")
     return v
 
-def inspectHand(hand):
-    # if all cards contain S,H,D, or C : Flush
-    # if all cards are in a sequence: Straight
-    # if 2 or more have the same first element
-    # if 2 have the same first element and 3 have same first element but different from the other 2
-    
-    
+def makeWager(stack):
+    wager = input("You have $" + str(stack) + " to wager.  How much will you wager?")
+    return wager
+
+def inspectHand(playerHand):
+    h = ''.join(playerHand)
+    pair = re.compile(r".*([^SHDC]).*\1")
+    try:
+        m = pair.match(h).groups()
+        for i in m:
+            print("You got a pair of " + i + "'s!")
+    except:
+        print("You got no pairs")
+    sleep(3)
+    #if pair.match(h):
+    #    print("You got a pair of" + c + "s!")
+
 def mainLoop():
     print("POKER!")
     while True:
         u = userMenu()
+        stack = 0
         if u in ("d", "de", "dea", "deal"):
-            stack = buyChips()
+            if stack == 0:
+                print("You need to buy some chips.")
+                stack = buyChips()
+                sleep(1)
+                print("You now have $" + str(stack) + " in chips.")
             deck = createDeck(52)
             nd = shuffleDeck(deck)
             playerHand, dealerHand = dealHand(5, nd)
+            sleep(1)
             print(playerHand)
-            wager = input("You have $" + str(stack) + " to wager.  How much will you wager?")
-            playerBest = inspectHand(playerHand)
-            dealerBest = inspectHand(dealerHand)
-            outcome = compareHands(playerHand, dealerHand)
-            if outcome == 1:
-                print("You won the hand!")
-                stack = 2*wager
+            sleep(1)
+            makeWager(stack)
+            sleep(1)
+            inspectHand(playerHand)
 
         elif u in ("h", "he", "hel", "help"):
             print("That would be nice, wouldn't it?")
