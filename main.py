@@ -12,6 +12,12 @@ import re
 SUITS = ["S", "H", "D", "C"]
 RANKS = ["2", "3", "4", "5", "6", "7", "8", "9", "T", "J", "Q", "K", "A"]
 
+# Dictionary to expand names
+
+suits_full = {'S': 'Spades', 'H': 'Hearts', 'D': 'Diamonds', 'C': 'Clubs'}
+ranks_full = {'2': 'Two', '3': 'Three','4': 'Four','5': 'Five','6': 'Six','7': 'Seven','8': 'Eight',\
+    '9': 'Nine','T': 'Ten','J': 'Jack','Q': 'Queen','K': 'King','A': 'Ace'}
+
 def createDeck(n):
     """ Create an unshuffled deck of n cards """
     deck = []
@@ -77,8 +83,6 @@ def inspectHand(playerHand):
     except:
         print("You got no pairs")
     sleep(3)
-    #if pair.match(h):
-    #    print("You got a pair of" + c + "s!")
 
 def mainLoop():
     print("POKER!")
