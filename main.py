@@ -37,6 +37,8 @@ def shuffleDeck(deck):
     return newdeck
 
 def drawCard(deck, hand):
+    """ Random selection of a single card from a deck,
+    inserting it into a hand. """
     card = pick(deck)
     deck.remove(card)
     hand.append(card)
@@ -74,35 +76,73 @@ def makeWager(stack):
     return wager
 
 def inspectHand(playerHand):
-    h = ''.join(playerHand)
-    pair = re.compile(r".*([^SHDC]).*\1")
-    try:
-        m = pair.match(h).groups()
-        for i in m:
-            print("You got a pair of " + i + "'s!")
-    except:
-        print("You got no pairs")
-    sleep(3)
+    value = 0
 
-def mainLoop():
-    print("POKER!")
+    hand = ''.join(playerHand)
+    spade = re.findall("S", hand)
+    heart = re.findall("H", hand)
+    diamond = re.findall("D", hand)
+    club = re.findall("C", hand)
+
+    print("You got " + str(len(spade)) + " spades.")
+    print("You got " + str(len(heart)) + " hearts.")
+    print("You got " + str(len(diamond)) + " diamonds.")
+    print("You got " + str(len(club)) + " clubs.")
+
+    if len(spade) == 5 or len(heart) == 5 or len(diamond) == 5 or len(club) == 5:
+        print("You got a flush!")
+        value = value + 64
+    else:
+        pass
+
+    findranks = re.findall("[^SDHC]+", hand)
+    list.sort(findranks)
+    rankhand = ''.join(findranks)
+    ## Find a pair
+    pair = re.compile(r".*(.).*\1")
+    try:
+        m = pair.match(rankhand).groups()
+        print("You got a pair of " + str(m[0]) + "'s")
+    except:
+        print("You did not get a pair.")
+    ## Two Pairs
+    twopair = re.compile(r".*(.).*\1.*(.).*\2")
+    try:
+        m = twopair.match(rankhand).groups()
+        print("You got a pair of " + str(m[0]) + "'s and a pair of " + str(m[1]) + "'s.")
+    except:
+        print("You did not get two pairs.")
+    ## Three of a Kind
+    threeof = re.compile(r".*(.).*\1.*\1")
+    try:
+        m = threeof.match(rankhand).groups()
+        print("You got three " + str(m[0]) + "'s")
+    except:
+        print("You did not get three of a kind.")
+    ## Four of a Kind
+    fourof = re.compile(r".*(.).*\1.*\1.*\1")
+    try:
+        m = fourof.match(rankhand).groups()
+        print("You got four " + str(m[0]) + "'s")
+    except:
+        print("You did not get four of a kind.")
+        
+    def mainLoop():
     while True:
+        print("")
         u = userMenu()
         stack = 0
         if u in ("d", "de", "dea", "deal"):
-            if stack == 0:
-                print("You need to buy some chips.")
-                stack = buyChips()
-                sleep(1)
-                print("You now have $" + str(stack) + " in chips.")
+            #if stack == 0:
+            #    print("You need to buy some chips.")
+            #    stack = buyChips()
+            #    sleep(1)
+            #    print("You now have $" + str(stack) + " in chips.")
             deck = createDeck(52)
             nd = shuffleDeck(deck)
             playerHand, dealerHand = dealHand(5, nd)
-            sleep(1)
             print(playerHand)
-            sleep(1)
-            makeWager(stack)
-            sleep(1)
+            #makeWager(stack)
             inspectHand(playerHand)
 
         elif u in ("h", "he", "hel", "help"):
