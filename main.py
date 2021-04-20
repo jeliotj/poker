@@ -6,9 +6,9 @@
 
 from time import sleep
 from operator import itemgetter, attrgetter
-import hands
-import wagers
-import deal
+from hands import *
+from wagers import *
+from deal import *
 
 # Constants
 SUITS = ["S", "H", "D", "C"]
