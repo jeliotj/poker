@@ -9,13 +9,9 @@ from operator import itemgetter, attrgetter
 from hands import *
 from wagers import *
 from deal import *
+from cards import *
 
 # Constants
-SUITS = ["S", "H", "D", "C"]
-NRANKS = {"2": 2, "3": 3, "4": 4, "5": 5, "6": 6, "7": 7, "8": 8, "9": 9, "T": 10, "J": 11, "Q": 12, "K": 13, "A": 14}
-suits_full = {'S': 'Spades', 'H': 'Hearts', 'D': 'Diamonds', 'C': 'Clubs'}
-ranks_full = {'2': 'Two', '3': 'Three','4': 'Four','5': 'Five','6': 'Six','7': 'Seven','8': 'Eight',\
-    '9': 'Nine','T': 'Ten','J': 'Jack','Q': 'Queen','K': 'King','A': 'Ace'}
 
 def userMenu():
     """ Present menu options to the user """

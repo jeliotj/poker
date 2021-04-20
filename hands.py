@@ -1,4 +1,5 @@
 import re
+from cards import *
 
 def findPair(string):
     """ Find a pair """
