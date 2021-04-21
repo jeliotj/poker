@@ -10,7 +10,7 @@ from deal import *
 from cards import *
 
 # Constants
-total_each = {  'royal':        0, 
+total_each = {  'royalflush':        0, 
                 'strflush':     0, 
                 'fourkind':     0, 
                 'fullhouse':    0, 
@@ -39,9 +39,9 @@ def scoreHand(hand):
     rank_string = rankString(sorted_hand)
 
     ## Finding all possible hands 
-    if findFlush(hand) != 0 and findStraight(hand) != 0 and sorted_hand[-1][2] == 14:
+    if findFlush(hand) != 0 and findStraight(sorted_hand) != 0 and sorted_hand[-1][2] == 14:
         score = 'royalflush'
-    elif findFlush(hand) != 0 and findStraight(hand) != 0:
+    elif findFlush(hand) != 0 and findStraight(sorted_hand) != 0:
         score = 'strflush'
     elif fourKind(rank_string) != 0:
         score = 'fourkind'
@@ -55,7 +55,7 @@ def scoreHand(hand):
         score = 'twopair'
     elif findPair(rank_string) != 0:
         score = 'onepair'
-    elif findStraight(hand) != 0:
+    elif findStraight(sorted_hand) != 0:
         score = 'straight'
     else:
         score = 'highcard'
@@ -74,6 +74,8 @@ def mainLoop():
                 handtype = scoreHand(playerHand)
                 total_each[handtype] += 1
             print(total_each)
+            for k in total_each:
+                total_each[k] = 0
         else:
             break
 
