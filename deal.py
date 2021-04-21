@@ -29,9 +29,7 @@ def drawCard(deck, hand):
 def dealHand(n, deck):
     """ Deal an n card hand with a shuffled deck. """
     player = []
-    dealer = []
     for i in range(0,n):
         drawCard(deck, player)
-        drawCard(deck, dealer)
-    return player, dealer
+    return player
 

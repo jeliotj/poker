@@ -14,7 +14,6 @@ def findPair(string):
     pair = re.compile(r".*(.).*\1")
     try:
         m = pair.match(string).groups()
-        #print("You got a pair of " + str(m[0]) + "'s")
     except:
         return 0
 
@@ -22,7 +21,6 @@ def twoPair(string):
     twopair = re.compile(r".*(.).*\1.*(.).*\2")
     try:
         m = twopair.match(string).groups()
-        #print("You got a pair of " + str(m[0]) + "'s and a pair of " + str(m[1]) + "'s.")
     except:
         return 0
 
@@ -30,7 +28,6 @@ def threeKind(string):
     threeof = re.compile(r".*(.).*\1.*\1")
     try:
         m = threeof.match(string).groups()
-        #print("You got three " + str(m[0]) + "'s")
     except:
         return 0
 
@@ -38,20 +35,17 @@ def fourKind(string):
     fourof = re.compile(r".*(.).*\1.*\1.*\1")
     try:
         m = fourof.match(string).groups()
-        #print("You got four " + str(m[0]) + "'s")
     except:
         return 0
 
 def findStraight(hand):
     if hand[4][2] == (hand[3][2] + 1) and hand[3][2] == (hand[2][2] + 1) and hand[2][2] == (hand[1][2] + 1) and hand[1][2] == (hand[0][2] + 1):
         return 1
-        #print("You got a straight!")
     else:
         return 0
 
 def findFlush(hand):
     if hand[0][1] == hand[1][1] == hand[2][1] == hand[3][1] == hand[4][1]:
         return 1
-        #print("You got a flush in " + suits_full.get(hand[0][1]) + "!")
     else:
         return 0
