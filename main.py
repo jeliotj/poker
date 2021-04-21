@@ -73,8 +73,12 @@ def mainLoop():
                 playerHand = dealHand(5, nd)
                 handtype = scoreHand(playerHand)
                 total_each[handtype] += 1
-            print(total_each)
             for k in total_each:
+                if len(k) <= 5:
+                    print(k + ":", end='\t\t')
+                else:
+                    print(k + ":", end='\t')
+                print(total_each[k])
                 total_each[k] = 0
         else:
             break
