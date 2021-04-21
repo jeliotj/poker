@@ -18,6 +18,7 @@ def findPair(string):
         return 0
 
 def twoPair(string):
+    """ Find two pairs """
     twopair = re.compile(r".*(.).*\1.*(.).*\2")
     try:
         m = twopair.match(string).groups()
@@ -25,6 +26,7 @@ def twoPair(string):
         return 0
 
 def threeKind(string):
+    """ Find three of a kind """
     threeof = re.compile(r".*(.).*\1.*\1")
     try:
         m = threeof.match(string).groups()
@@ -32,6 +34,7 @@ def threeKind(string):
         return 0
 
 def fourKind(string):
+    """ Find four of a kind """
     fourof = re.compile(r".*(.).*\1.*\1.*\1")
     try:
         m = fourof.match(string).groups()
@@ -39,12 +42,14 @@ def fourKind(string):
         return 0
 
 def findStraight(hand):
+    """ Find a straight """
     if hand[4][2] == (hand[3][2] + 1) and hand[3][2] == (hand[2][2] + 1) and hand[2][2] == (hand[1][2] + 1) and hand[1][2] == (hand[0][2] + 1):
         return 1
     else:
         return 0
 
 def findFlush(hand):
+    """ Find a flush """
     if hand[0][1] == hand[1][1] == hand[2][1] == hand[3][1] == hand[4][1]:
         return 1
     else:
