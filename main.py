@@ -1,10 +1,9 @@
 #!/usr/bin/python3
-##### A Poker Game #####
+##### Poker Hand Simulator #####
 # By Eliot Smith
 # Version 0.0.1
 # April 13, 2021
 
-from time import sleep
 from operator import itemgetter, attrgetter
 from hands import *
 from wagers import *
@@ -77,8 +76,9 @@ def mainLoop():
                     final = final + score
                 else:
                     i += 1
-            print(playerHand)
-            print(final)
+            for card in playerHand:
+                print(ranks_full.get(card[0]) + " of " + suits_full.get(card[1]))
+
             print("It took " + str(i) + " deals to get a straight or better.")
 
         elif u in ("h", "he", "hel", "help"):
