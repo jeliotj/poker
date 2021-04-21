@@ -28,38 +28,58 @@ def sortCards(hand):
     sorted_hand = sorted(hand, key=itemgetter(2))
     return sorted_hand
    
-def inspectHand(hand):
-
+def scoreHand(hand):
+    score = 0
+    ## Some preliminary necessities
     sorted_hand = sortCards(hand)
     rank_string = rankString(sorted_hand)
 
-    ## Find the possible hands of value
-    findFlush(sorted_hand)
-    findPair(rank_string)
-    twoPair(rank_string)
-    threeKind(rank_string)
-    fourKind(rank_string)
+    ## Finding all possible hands 
+
+    if findFlush(hand) != 0 and findStraight(hand) != 0 and sorted_hand[-1][2] == 14:
+        score = score + 100
+    elif findFlush(hand) != 0 and findStraight(hand) != 0:
+        score = score + 90
+    elif fourKind(rank_string) != 0:
+        score = score + 80
+    elif findFlush(hand) != 0:
+        score = score + 60
+    elif threeKind(rank_string) != 0:
+        score = score + 40
+    elif twoPair(rank_string) != 0:
+        score = score + 30
+    elif findPair(rank_string) != 0:
+        score = score + 20
+    elif findStraight(hand) != 0:
+        score = score + 50
+    else:
+        score = score + sorted_hand[-1][2]
+
+    return score
     
 def mainLoop():
     while True:
         print("")
         u = userMenu()
-        stack = 0
         if u in ("d", "de", "dea", "deal"):
-            #if stack == 0:
-            #    print("You need to buy some chips.")
-            #    stack = buyChips()
-            #    sleep(1)
-            #    print("You now have $" + str(stack) + " in chips.")
-            deck = createDeck(52)
-            nd = shuffleDeck(deck)
-            playerHand, dealerHand = dealHand(5, nd)
-            print("Here is your hand:")
-            for card in playerHand:
-                print((playerHand.index(card)+1) * '\t', end='')
-                print(ranks_full.get(card[0]) + " of " + suits_full.get(card[1]))
-            #makeWager(stack)
-            inspectHand(playerHand)
+            final = 0
+            i = 0
+            while final < 50:
+                deck = createDeck(52)
+                nd = shuffleDeck(deck)
+                playerHand, dealerHand = dealHand(5, nd)
+                #print("Here is your hand:")
+                #for card in playerHand:
+                #    print((playerHand.index(card)+1) * '\t', end='')
+                #    print(ranks_full.get(card[0]) + " of " + suits_full.get(card[1]))
+                score = scoreHand(playerHand)
+                if score >= 50:
+                    final = final + score
+                else:
+                    i += 1
+            print(playerHand)
+            print(final)
+            print("It took " + str(i) + " deals to get a straight or better.")
 
         elif u in ("h", "he", "hel", "help"):
             print("That would be nice, wouldn't it?")
