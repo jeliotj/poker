@@ -1,6 +1,41 @@
 import re
 from cards import *
 
+def sortCards(hand):
+    """ Sort hand according to rank """
+    sorted_hand = sorted(hand, key=itemgetter(2))
+    return sorted_hand
+   
+def scoreHand(hand):
+    ## Some preliminary necessities
+    sorted_hand = sortCards(hand)
+    rank_string = rankString(sorted_hand)
+
+    ## Finding all possible hands 
+    if findFlush(hand) != 0 and findStraight(sorted_hand) != 0 and sorted_hand[-1][2] == 14:
+        score = 'royalflush'
+    elif findFlush(hand) != 0 and findStraight(sorted_hand) != 0:
+        score = 'strflush'
+    elif fourKind(rank_string) != 0:
+        score = 'fourkind'
+    elif findFlush(hand) != 0:
+        score = 'flush'
+    elif threeKind(rank_string) != 0 and twoPair(rank_string) != 0:
+        score = 'fullhouse'
+    elif threeKind(rank_string) != 0:
+        score = 'threekind'
+    elif twoPair(rank_string) != 0:
+        score = 'twopair'
+    elif findPair(rank_string) != 0:
+        score = 'onepair'
+    elif findStraight(sorted_hand) != 0:
+        score = 'straight'
+    else:
+        score = 'highcard'
+
+    return score
+
+
 def rankString(hand):
     """ Creates a string so that RE can be used to find pairs, three and four of a kind. """
     rankhand = []
