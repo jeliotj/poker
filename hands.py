@@ -1,5 +1,6 @@
 import re
-from cards import *
+from operator import *
+from constants import *
 
 def sortCards(hand):
     """ Sort hand according to rank """

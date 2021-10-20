@@ -1,5 +1,5 @@
 from random import choice as pick
-from cards import *
+from constants import *
 
 def createDeck(n):
     """ Create an unshuffled deck of n cards """
