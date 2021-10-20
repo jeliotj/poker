@@ -4,7 +4,6 @@
 # Version 0.0.1
 # April 13, 2021
 
-from operator import itemgetter
 from hands import *
 from deal import *
 from constants import *
