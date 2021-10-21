@@ -1,5 +1,5 @@
 import re
-from operator import *
+from operator import itemgetter
 from constants import *
 
 def sortCards(hand):
