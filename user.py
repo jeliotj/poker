@@ -12,7 +12,7 @@ Please enter a positive whole number or 'q' for quit.\n""")
             sys.exit()
         else:
             try:
-                int(numRuns)
+                numRuns = int(numRuns)
                 return numRuns
             except ValueError:
                 print("That doesn't look like a valid number! Try again...")

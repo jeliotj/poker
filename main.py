@@ -13,7 +13,8 @@ def mainLoop():
     while True:
         print("")
         u = userMenu()
-        for runs in range(0, int(u)):
+        
+        for runs in range(0, u):
             deck = createDeck(52)
             nd = shuffleDeck(deck)
             playerHand = dealHand(5, nd)
