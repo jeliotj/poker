@@ -1,10 +1,18 @@
 ## User Interface Functions
+import sys
 
 def userMenu():
-    """ Present options to the user """
-    print("""How many deals to you want to run?
-        Please enter a number or 'q' for quit. """)
-    user = input()
-    return user
+    """ Get user input"""
 
+    numRuns = input("""How many deals to you want to run?
+Please enter a positive whole number or 'q' for quit.\n""")
 
+    while True:
+        if numRuns == 'q':
+            sys.exit()
+        else:
+            try:
+                int(numRuns)
+                return numRuns
+            except ValueError:
+                print("That doesn't look like a valid number! Try again...")
