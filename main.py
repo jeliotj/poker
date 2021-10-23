@@ -13,10 +13,10 @@ def mainLoop():
     while True:
         print("")
         u = userMenu()
-        
+        deck = createDeck(52)
+
         for runs in range(0, u):
-            deck = createDeck(52)
-            nd = shuffleDeck(deck)
+            nd = deck.copy()
             playerHand = dealHand(5, nd)
             handtype = scoreHand(playerHand)
             total_each[handtype] += 1
@@ -27,5 +27,4 @@ def mainLoop():
                 print(k + ":", end='\t')
             print(total_each[k])
             total_each[k] = 0
-
 mainLoop()
